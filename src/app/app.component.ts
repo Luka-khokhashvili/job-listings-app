@@ -4,10 +4,16 @@ import { DataService } from './services/data.service';
 import { Job } from './interfaces/job';
 import { CommonModule } from '@angular/common';
 import { JobListComponent } from './components/job-list/job-list.component';
+import { FilterTagListComponent } from './components/filter-tag-list/filter-tag-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, JobListComponent],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    JobListComponent,
+    FilterTagListComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

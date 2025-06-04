@@ -1,4 +1,4 @@
-<section class="w-full flex flex-col justify-evenly items-center gap-4 py-8">
+<section class="w-full flex flex-col justify-evenly items-center gap-4 py-8 z-1">
   <div
     *ngFor="let job of jobList"
     [ngClass]="{
@@ -27,7 +27,12 @@
             featured
           </p>
         </div>
-        <h1 class="text-xl font-bold">{{ job.position }}</h1>
+
+        <a
+          href=""
+          class="text-xl font-bold hover:text-[#5ba4a4] transition duration-200"
+          >{{ job.position }}</a
+        >
         <!-- About job -->
         <div
           class="flex flex-wrap items-center text-sm font-semibold text-[#7b8e8e] gap-x-2"
@@ -43,11 +48,13 @@
 
     <!-- Job specifications -->
     <div class="flex flex-row gap-4 items-center">
-      <div
-        class="px-2 py-1 bg-[#eef6f6] rounded"
-        *ngFor="let tag of getJobTags(job)"
-      >
-        <p class="text-[#5ba4a4] text-lg font-medium">{{ tag }}</p>
+      <div class="group" *ngFor="let tag of getJobTags(job)">
+        <button
+          (click)="addFilterTag(tag)"
+          class="bg-[#eef6f6] rounded px-2 py-1 group-hover:bg-[#5ba4a4] text-[#5ba4a4] text-lg font-semibold cursor-pointer group-hover:text-white transition duration-200"
+        >
+          {{ tag }}
+        </button>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Job } from '../../interfaces/job';
 
@@ -11,6 +11,7 @@ import { Job } from '../../interfaces/job';
 })
 export class JobListComponent {
   jobList: Job[] = [];
+  @Output() tagList: string[] = [];
 
   constructor(private dataService: DataService) {}
 
@@ -28,5 +29,9 @@ export class JobListComponent {
       ...(job.languages || []),
       ...(job.tools || []),
     ];
+  }
+
+  addFilterTag(tag: string) {
+    this.tagList.push(tag);
   }
 }
