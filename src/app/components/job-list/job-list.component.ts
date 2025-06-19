@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Output } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Job } from '../../interfaces/job';
+import { TagFilterService } from '../../services/tag-filter.service';
 
 @Component({
   selector: 'app-job-list',
@@ -13,7 +14,10 @@ export class JobListComponent {
   jobList: Job[] = [];
   @Output() tagList: string[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private tagFilter: TagFilterService
+  ) {}
 
   ngOnInit() {
     this.dataService.getAllJobData().subscribe((data) => {
@@ -32,6 +36,6 @@ export class JobListComponent {
   }
 
   addFilterTag(tag: string) {
-    this.tagList.push(tag);
+    this.tagFilter.addTag(tag);
   }
 }
