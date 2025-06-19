@@ -1,17 +1,17 @@
-<section class="w-full flex flex-col justify-evenly items-center gap-4 py-8">
+<section class="w-full flex flex-col justify-evenly items-center gap-10 md:gap-4 py-8">
   <div
     *ngFor="let job of tagFilterService.filteredJobs$ | async"
     [ngClass]="{
       'border-l-5 border-[#5ba4a4]': job.featured,
       'border-l-0': !job.featured
     }"
-    class="w-2/3 bg-white p-6 flex flex-row justify-between rounded shadow-xl/20 shadow-[#5ba4a4]"
+    class="relative w-5/6 xl:w-2/3 bg-white p-6 flex flex-col lg:flex-row justify-between rounded shadow-xl/20 shadow-[#5ba4a4]"
   >
     <div class="flex flex-row gap-4">
       <!-- Company Logo -->
-      <img [src]="job.logo" [alt]="job.company" />
+      <img [src]="job.logo" [alt]="job.company" class="absolute md:static -top-[10%] w-[20%] lg:w-auto lg:h-auto" />
       <!-- Main Details -->
-      <div class="h-full flex flex-col justify-evenly">
+      <div class="h-full flex flex-col justify-evenly pt-5 md:p-0 gap-2 md:gap-0">
         <div class="flex flex-row gap-2">
           <h3 class="text-[#5ba4a4] font-bold">{{ job.company }}</h3>
           <p
@@ -46,8 +46,10 @@
       </div>
     </div>
 
+    <hr class="block w-[90%] border-[#7b8e8e] my-4 lg:hidden">
+
     <!-- Job specifications -->
-    <div class="flex flex-row gap-4 items-center">
+    <div class="flex flex-row gap-4 items-center flex-wrap">
       <div class="group" *ngFor="let tag of getJobTags(job)">
         <button
           (click)="addFilterTag(tag)"
