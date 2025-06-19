@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Subject } from 'rxjs';
+import { Job } from '../interfaces/job';
 
 @Injectable({
   providedIn: 'root',
@@ -7,11 +8,37 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class TagFilterService {
   constructor() {}
 
+  private _jobs = new BehaviorSubject<Job[]>([]);
+  public jobs$ = this._jobs.asObservable();
+
+  setJobs(jobs: Job[]) {
+    this._jobs.next(jobs);
+  }
+
   private _tagList = new BehaviorSubject<string[]>([]);
   public selectedTags$ = this._tagList.asObservable();
 
+  getJobTags(job: any): string[] {
+    return [
+      job.role,
+      job.level,
+      ...(job.languages || []),
+      ...(job.tools || []),
+    ];
+  }
+
+  public filteredJobs$ = combineLatest([this.jobs$, this.selectedTags$]).pipe(
+    map(([jobs, tags]) => {
+      if (!tags.length) return jobs;
+      return jobs.filter((job) => {
+        const jobTags = this.getJobTags(job);
+        return tags.every((tag) => jobTags.includes(tag));
+      });
+    })
+  );
+
   private _notification = new Subject<string>();
-  notification$ = this._notification.asObservable();
+  public notification$ = this._notification.asObservable();
 
   addTag(newTag: string) {
     const currTagList = this._tagList.value;

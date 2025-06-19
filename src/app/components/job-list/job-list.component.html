@@ -1,6 +1,6 @@
-<section class="w-full flex flex-col justify-evenly items-center gap-4 py-8 z-1">
+<section class="w-full flex flex-col justify-evenly items-center gap-4 py-8">
   <div
-    *ngFor="let job of jobList"
+    *ngFor="let job of tagFilterService.filteredJobs$ | async"
     [ngClass]="{
       'border-l-5 border-[#5ba4a4]': job.featured,
       'border-l-0': !job.featured

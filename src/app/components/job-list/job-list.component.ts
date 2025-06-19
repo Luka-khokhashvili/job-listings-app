@@ -12,17 +12,15 @@ import { TagFilterService } from '../../services/tag-filter.service';
 })
 export class JobListComponent {
   jobList: Job[] = [];
-  @Output() tagList: string[] = [];
 
   constructor(
     private dataService: DataService,
-    private tagFilter: TagFilterService
+    public tagFilterService: TagFilterService
   ) {}
 
   ngOnInit() {
     this.dataService.getAllJobData().subscribe((data) => {
-      console.log(data);
-      this.jobList = data;
+      this.tagFilterService.setJobs(data);
     });
   }
 
@@ -36,6 +34,6 @@ export class JobListComponent {
   }
 
   addFilterTag(tag: string) {
-    this.tagFilter.addTag(tag);
+    this.tagFilterService.addTag(tag);
   }
 }
