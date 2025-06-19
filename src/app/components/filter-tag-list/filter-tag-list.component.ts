@@ -11,22 +11,9 @@ import { Observable } from 'rxjs';
 })
 export class FilterTagListComponent {
   selectedTags$: Observable<string[]>;
-  public notificationMessage = '';
-  public showNotification = false;
 
   constructor(private tagFilterService: TagFilterService) {
     this.selectedTags$ = this.tagFilterService.selectedTags$;
-  }
-
-  ngOnInit() {
-    this.tagFilterService.notification$.subscribe((msg) => {
-      this.notificationMessage = msg;
-      this.showNotification = true;
-
-      setTimeout(() => {
-        this.showNotification = false;
-      }, 3000); // hide after 3s
-    });
   }
 
   removeFilterTag(tag: string) {

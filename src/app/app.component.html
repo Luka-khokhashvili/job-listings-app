@@ -1,9 +1,12 @@
 <section class="bg-[#effafa] flex flex-col gap-10">
-  <img
-    src="images/bg-header-desktop.svg"
-    alt="Abstract geometric header"
-    class="w-full bg-[#5ba4a4] -mb-20"
-  />
+  <picture
+    ><source media="(min-width:640px)" srcset="images/bg-header-desktop.svg" />
+    <img
+      src="images/bg-header-mobile.svg"
+      alt="Abstract geometric header"
+      class="w-full bg-[#5ba4a4] -mb-20"
+    />
+  </picture>
 
   <app-filter-tag-list />
 

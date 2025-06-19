@@ -1,21 +1,23 @@
 <section class="w-full flex items-center justify-center">
   <div
     *ngIf="selectedTags$ | async as selectedTags"
-    class="w-2/3 flex flex-row justify-between items-center bg-white px-14 py-6 rounded shadow-xl/20 shadow-[#5ba4a4]"
+    class="w-5/6 xl:w-2/3 flex flex-row justify-between items-center bg-white px-8 xl:px-14 py-6 rounded shadow-xl/20 shadow-[#5ba4a4]"
     [ngClass]="{
       'opacity-100 visible': selectedTags.length > 0,
       'opacity-0 invisible': selectedTags.length === 0
     }"
   >
-    <div class="flex items-center gap-3 h-full">
+    <div class="flex flex-wrap items-center gap-3 h-full">
       <div
         class="flex items-center rounded bg-[#eef6f6]"
         *ngFor="let tag of selectedTags"
       >
-        <p class="text-[#5ba4a4] text-lg font-semibold px-4">{{ tag }}</p>
+        <p class="text-[#5ba4a4] text-[1rem] md:text-lg font-semibold px-1.5 lg:px-4">
+          {{ tag }}
+        </p>
         <Button
           (click)="removeFilterTag(tag)"
-          class="flex items-center justify-center p-3 bg-[#5ba4a4] rounded-r cursor-pointer hover:bg-[#2c3a3a] transition duration-200"
+          class="flex items-center justify-center p-1.5 lg:p-3 bg-[#5ba4a4] rounded-r cursor-pointer hover:bg-[#2c3a3a] transition duration-200"
         >
           <img src="images/icon-remove.svg" alt="remove" />
         </Button>
@@ -23,7 +25,7 @@
     </div>
     <button
       (click)="clearAll()"
-      class="text-lg text-[#5ba4a4] font-semibold hover:underline cursor-pointer"
+      class="text-lg text-[#7b8e8e] font-semibold hover:text-[#5ba4a4] hover:underline cursor-pointer"
     >
       Clear
     </button>
